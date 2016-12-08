@@ -150,7 +150,7 @@ INSTALLED_APPS = (
     'django_slick_admin',
     'django_slick_admin_login',
 
-    #'djangocms_admin_style',
+    # 'djangocms_admin_style',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',
