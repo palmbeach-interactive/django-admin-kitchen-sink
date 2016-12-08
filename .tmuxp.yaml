@@ -1,0 +1,14 @@
+session_name: kitchen_sink
+start_directory: ./
+windows:
+
+- window_name: runserver
+  layout: tiled
+  shell_command_before:
+    - 'source ~/srv/django-admin-kitchen-sink/bin/activate'
+  panes:
+    - shell_command:
+        - cd app
+        - ./manage.py runserver 0.0.0.0:6001
+    - cd app
+
