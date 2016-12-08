@@ -3,6 +3,8 @@
 *.pyc
 *.bak
 .idea
+env
+venv
 
 app/project.db
 app/media/
