@@ -46,6 +46,9 @@ if 'DYNO' in os.environ:
     DATABASES = {'default': {}}
     DATABASES['default'].update(db_from_env)
 
+    ALLOWED_HOSTS = ['djaks.herokuapp.com',]
+
+
 else:
     DATABASES = {
         'default': {
