@@ -133,11 +133,11 @@ class CompleteToolboxBase(models.Model):
         null=True, blank=True,
         help_text=DEMO_HELP_TEXT
     )
-    datetime_start = models.DateField(
+    datetime_start = models.DateTimeField(
         null=True, blank=True,
         help_text=DEMO_HELP_TEXT
     )
-    datetime_end = models.DateField(
+    datetime_end = models.DateTimeField(
         null=True, blank=True,
         help_text=DEMO_HELP_TEXT
     )
