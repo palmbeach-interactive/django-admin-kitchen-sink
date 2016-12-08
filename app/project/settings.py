@@ -1,6 +1,6 @@
 import os
 gettext = lambda s: s
-DATA_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 """
 Django settings for project project.
 
@@ -32,20 +32,33 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
-
-
-
-
 ROOT_URLCONF = 'project.urls'
-
-
-
 WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+
+# chekck if runing in heroku environment
+if 'DYNO' in os.environ:
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES = {'default': {}}
+    DATABASES['default'].update(db_from_env)
+
+else:
+    DATABASES = {
+        'default': {
+            'CONN_MAX_AGE': 0,
+            'ENGINE': 'django.db.backends.sqlite3',
+            'HOST': 'localhost',
+            'NAME': 'project.db',
+            'PASSWORD': '',
+            'PORT': '',
+            'USER': ''
+        }
+    }
+
 
 
 
@@ -69,12 +82,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
-STATIC_ROOT = os.path.join(DATA_DIR, 'static')
 
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'project', 'static'),
+    os.path.join(PROJECT_ROOT, 'static'),
 )
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 SITE_ID = 1
 
 
@@ -205,17 +223,7 @@ CMS_PERMISSION = True
 
 CMS_PLACEHOLDER_CONF = {}
 
-DATABASES = {
-    'default': {
-        'CONN_MAX_AGE': 0,
-        'ENGINE': 'django.db.backends.sqlite3',
-        'HOST': 'localhost',
-        'NAME': 'project.db',
-        'PASSWORD': '',
-        'PORT': '',
-        'USER': ''
-    }
-}
+
 
 MIGRATION_MODULES = {
     

@@ -20,6 +20,13 @@ Pillow>=3.0
 django-sekizai>=0.9
 django-select2<5.0six
 
+# heroku
+gunicorn==19.6.0
+dj-database-url==0.4.1
+whitenoise==3.2
+psycopg2
+django_storages==1.4.1
+boto==2.41.0
 
 # kitchensink
 django-hvad==1.6.0
