@@ -179,7 +179,7 @@ INSTALLED_APPS = (
     'djangocms_googlemap',
     'djangocms_video',
     'project',
-    'charsleft_widget',
+    'charsleft',
     'kitchensink',
     'toolbox',
 )

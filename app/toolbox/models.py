@@ -20,11 +20,7 @@ from multiselectfield import MultiSelectField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
-
-
 DEMO_HELP_TEXT = 'And some words about how to use "this" field.'
-
 
 class SimpleTool(models.Model):
 

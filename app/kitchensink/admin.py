@@ -12,7 +12,7 @@ from django.core import urlresolvers
 from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.files import get_thumbnailer
 from hvad.admin import TranslatableAdmin, TranslatableTabularInline
-from charsleft_widget.widgets import CharsLeftCharFieldWidget, CharsLeftTextFieldWidget
+from charsleft.admin import CharsLeftAdminMixin
 
 
 THUMBNAIL_OPT = dict(size=(120, 80), crop=True, bw=False, quality=80)
@@ -38,7 +38,7 @@ class ImageAdminMixin(admin.ModelAdmin):
 
 
 @admin.register(Cupboard)
-class CupboardAdmin(ImageAdminMixin, TranslatableAdmin):
+class CupboardAdmin(CharsLeftAdminMixin, ImageAdminMixin, TranslatableAdmin):
     save_on_top = True
 
     date_hierarchy = 'last_time_cleaned'
@@ -59,15 +59,6 @@ class CupboardAdmin(ImageAdminMixin, TranslatableAdmin):
         'color',
         'cleaned_this_month',
     ]
-
-    formfield_overrides = {
-        models.TextField: {
-            'widget': CharsLeftTextFieldWidget()
-        },
-        models.CharField: {
-            'widget': CharsLeftCharFieldWidget()
-        },
-    }
 
     def cupboard_info(self, obj):
 
@@ -98,7 +89,7 @@ class CupboardAdmin(ImageAdminMixin, TranslatableAdmin):
 
 
 
-class ApplianceServiceInline(admin.TabularInline):
+class ApplianceServiceInline(CharsLeftAdminMixin, admin.TabularInline):
     model = ApplianceService
     extra = 0
 
@@ -115,28 +106,14 @@ class ApplianceAdmin(ImageAdminMixin, admin.ModelAdmin):
         ApplianceServiceInline,
     ]
 
-    formfield_overrides = {
-        models.TextField: {
-            'widget': CharsLeftTextFieldWidget()
-        },
-        models.CharField: {
-            'widget': CharsLeftCharFieldWidget()
-        },
-    }
 
-
-
-
-
-
-
-class SinkBitTabularInline(admin.TabularInline):
+class SinkBitTabularInline(CharsLeftAdminMixin, admin.TabularInline):
     model = SinkBit
     extra = 1
 
 
 
-class SinkBitStackedInline(admin.StackedInline):
+class SinkBitStackedInline(CharsLeftAdminMixin, admin.StackedInline):
     model = SinkBit
     extra = 1
 
@@ -144,7 +121,7 @@ class SinkBitStackedInline(admin.StackedInline):
 
 
 @admin.register(Sink)
-class SinkAdmin(admin.ModelAdmin):
+class SinkAdmin(CharsLeftAdminMixin, admin.ModelAdmin):
     save_on_top = True
 
 

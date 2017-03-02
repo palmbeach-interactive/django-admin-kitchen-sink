@@ -12,7 +12,6 @@ from django.core import urlresolvers
 from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.files import get_thumbnailer
 from hvad.admin import TranslatableAdmin, TranslatableTabularInline
-from charsleft_widget.widgets import CharsLeftCharFieldWidget, CharsLeftTextFieldWidget
 
 
 THUMBNAIL_OPT = dict(size=(120, 80), crop=True, bw=False, quality=80)

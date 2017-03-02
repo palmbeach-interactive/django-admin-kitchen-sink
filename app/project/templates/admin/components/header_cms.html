@@ -59,3 +59,18 @@
     var slick_admin_mode = 'cms';
 </script>
 <script src="{% static 'django_slick_admin/js/base.js' %}"></script>
+
+<script>
+
+    (function($) {
+        $(document).ready(function() {
+            var td_inputs = $('.form-row p.datetime');
+            td_inputs.each(function(i, el){
+                $(el).css('font-size', 0);
+                $(el).find('input:first-child').css('margin-left', 0).css('width', '89px').attr('placeholder', 'Date');
+                $(el).find('input:last-child').attr('placeholder', 'Time');
+            });
+        });
+    })(django.jQuery);
+
+</script>
