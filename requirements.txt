@@ -33,6 +33,3 @@ django-hvad==1.6.0
 django-admin-sortable2==0.6.4
 django-multiselectfield==0.1.4
 django-admin-tools==0.8.0
-
--e "git://github.com/palmbeach-interactive/django-slick-admin.git#egg=django-slick-admin"
--e "git://github.com/palmbeach-interactive/django-slick-admin-login.git#egg=django-slick-admin-login"

@@ -6,6 +6,6 @@
 env
 venv
 
-app/project.db
+project.db
 app/media/
 app/static/

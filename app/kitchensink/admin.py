@@ -8,11 +8,9 @@ from django.db import models
 from django.utils import timezone
 from datetime import timedelta
 from django.template.defaultfilters import truncatechars
-from django.core import urlresolvers
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from easy_thumbnails.files import get_thumbnailer
-from hvad.admin import TranslatableAdmin, TranslatableTabularInline
-from charsleft.admin import CharsLeftAdminMixin
+from parler.admin import TranslatableAdmin, TranslatableTabularInline
 
 
 THUMBNAIL_OPT = dict(size=(120, 80), crop=True, bw=False, quality=80)
@@ -38,7 +36,7 @@ class ImageAdminMixin(admin.ModelAdmin):
 
 
 @admin.register(Cupboard)
-class CupboardAdmin(CharsLeftAdminMixin, ImageAdminMixin, TranslatableAdmin):
+class CupboardAdmin(TranslatableAdmin):
     save_on_top = True
 
     date_hierarchy = 'last_time_cleaned'
@@ -54,7 +52,6 @@ class CupboardAdmin(CharsLeftAdminMixin, ImageAdminMixin, TranslatableAdmin):
     ]
 
     list_display = [
-        'key_image',
         'cupboard_info',
         'color',
         'cleaned_this_month',
@@ -67,7 +64,7 @@ class CupboardAdmin(CharsLeftAdminMixin, ImageAdminMixin, TranslatableAdmin):
             <hr>
             <p>{description}</p>
             </p>""".format(
-            admin_url=urlresolvers.reverse('admin:kitchensink_cupboard_change', args=(obj.pk,)),
+            admin_url=reverse('admin:kitchensink_cupboard_change', args=(obj.pk,)),
             title=obj.name,
             description=truncatechars(obj.description, 30) if obj.description else '-',
         )
@@ -89,31 +86,27 @@ class CupboardAdmin(CharsLeftAdminMixin, ImageAdminMixin, TranslatableAdmin):
 
 
 
-class ApplianceServiceInline(CharsLeftAdminMixin, admin.TabularInline):
+class ApplianceServiceInline(admin.TabularInline):
     model = ApplianceService
     extra = 0
 
 
 @admin.register(Appliance)
-class ApplianceAdmin(ImageAdminMixin, admin.ModelAdmin):
+class ApplianceAdmin(admin.ModelAdmin):
     save_on_top = True
-
-    list_display = [
-        'key_image',
-    ]
 
     inlines = [
         ApplianceServiceInline,
     ]
 
 
-class SinkBitTabularInline(CharsLeftAdminMixin, admin.TabularInline):
+class SinkBitTabularInline(admin.TabularInline):
     model = SinkBit
     extra = 1
 
 
 
-class SinkBitStackedInline(CharsLeftAdminMixin, admin.StackedInline):
+class SinkBitStackedInline(admin.StackedInline):
     model = SinkBit
     extra = 1
 
@@ -121,7 +114,7 @@ class SinkBitStackedInline(CharsLeftAdminMixin, admin.StackedInline):
 
 
 @admin.register(Sink)
-class SinkAdmin(CharsLeftAdminMixin, admin.ModelAdmin):
+class SinkAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
@@ -133,33 +126,6 @@ class SinkAdmin(CharsLeftAdminMixin, admin.ModelAdmin):
                 'datetime_start',
                 ('date_end', 'datetime_end',),
             )
-        }),
-        ('Titles (secondary - wide)', {
-            'classes': ('wide',),
-            'fields': (
-                ('title', 'subtitle',),
-                'date_start',
-                'datetime_start',
-                ('date_end', 'datetime_end',),
-            ),
-        }),
-        ('Titles (secondary - collapsed)', {
-            'classes': ('collapse',),
-            'fields': (
-                ('title', 'subtitle',),
-                'date_start',
-                'datetime_start',
-                ('date_end', 'datetime_end',),
-            ),
-        }),
-        ('Titles (secondary - collapsed & wide)', {
-            'classes': ('wide', 'collapse',),
-            'fields': (
-                ('title', 'subtitle',),
-                'date_start',
-                'datetime_start',
-                ('date_end', 'datetime_end',),
-            ),
         }),
     )
 
