@@ -1,0 +1,39 @@
+[tool]
+[tool.poetry]
+name = "django-admin-kitchen-sink"
+version = "0.2.0"
+description = "Django Slick Admin - Testing Env"
+authors = ["Marc Widmer <marc@pbi.io>"]
+
+packages = [
+    {include="app", from="."}
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django-cms = "^3.9.0"
+django-admin-sortable2 = "^1.0"
+django-admin-tools = "^0.9.1"
+django-slick-admin = "^0.2.3"
+django-parler = "^2.2"
+dj-database-url = "^0.5.0"
+python-decouple = "^3.4"
+django_extensions = "^3.1.3"
+django-settings-export = "^1.2.1"
+django-webpack-loader = "0.7.0"
+beautifulsoup4 = "^4.10.0"
+requests = "^2.26.0"
+Django = "3.2.7"
+psycopg2-binary = "^2.9.1"
+djangocms_text_ckeditor = "^4.0.0"
+django-multiselectfield = "^0.1.12"
+
+[tool.poetry.dev-dependencies]
+django-debug-toolbar = "^3.2.2"
+django-extensions = "^3.1.3"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+
