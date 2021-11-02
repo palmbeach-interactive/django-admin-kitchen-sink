@@ -2,7 +2,7 @@
   "name": "django-admin-kitchen-sink",
   "version": "0.2.0",
   "private": true,
-  "main": "./src/js/bundle.js",
+  "main": "./src/bundle.js",
   "scripts": {
     "app": "DJANGO_SETTINGS_MODULE=app.settings.development poetry run python ./manage.py runserver 0.0.0.0:8080",
     "watch": "NODE_ENV=development webpack-dev-server --config webpack/dev.js",

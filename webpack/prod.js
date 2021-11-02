@@ -2,15 +2,24 @@ const merge = require('webpack-merge');
 const path = require('path');
 const common = require('./common');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const BUILD = path.resolve(__dirname, '../', 'build');
+const RELEASE = path.resolve(__dirname, '../', 'app/django_slick_admin/static/django_slick_admin');
+
+
 module.exports = merge(common, {
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, '../', 'build'),
+    path: BUILD,
     filename: '[name].js',
   },
-  resolve: {
-    alias: {
-      vue$: 'vue/dist/vue.esm.js',
-    },
-  },
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: BUILD,
+        to: RELEASE,
+      }
+    ])
+  ],
 });
