@@ -108,6 +108,7 @@ class SinkBitTabularInline(admin.TabularInline):
 
 class SinkBitStackedInline(admin.StackedInline):
     model = SinkBit
+    classes = ['collapse']
     extra = 1
 
 
