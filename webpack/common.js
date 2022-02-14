@@ -15,6 +15,7 @@ const BUILD = path.resolve(__dirname, '../', 'build');
 module.exports = {
   entry: {
     bundle: ['babel-polyfill', './src/bundle.js'],
+    'cms-styles': ['babel-polyfill', './src/cms-styles-bundle.js'],
   },
   module: {
     rules: [
@@ -55,10 +56,13 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader',
-        ],
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[contenthash]',
+          outputPath: 'asset/img',
+          publicPath: '../asset/img',
+        },
       },
     ],
   },
@@ -74,8 +78,6 @@ module.exports = {
         from: path.resolve(SRC, 'asset'),
         to: path.resolve(BUILD, 'asset'),
       },
-    ], { debug: 'warning' }),
+    ], {debug: 'warning'}),
   ],
-
-
 };
