@@ -10,3 +10,4 @@ project.db
 app/media/
 app/static/
 /yarn-error.log
+/.nvmrc
